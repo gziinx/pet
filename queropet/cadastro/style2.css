@@ -133,3 +133,10 @@ body {
 .checkbox-item input[type="checkbox"] {
   transform: scale(1.2);
 }
+
+.biro{
+  margin-top: 20px;
+  max-width: 100%;
+  height: 3px;
+  background-color: #A46731;
+}
