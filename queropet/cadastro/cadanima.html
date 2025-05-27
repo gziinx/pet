@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueroPet - cadastro</title>
+  <link rel="stylesheet" href="style4.css" />
+  
+</head>
+
+<body>
+    <header class="menu">
+        <img width="30" height="30" src="./pngegg.png" alt="">
+        <h1>TechSphere</h1>
+    </header>
+  <main>
+    <div class="container">
+        <div class="left-side">
+          
+          
+          <img src="../img/logo1.png" alt="Logo QueroPet" class="logo" />
+          <p class="description">
+            QueroPet é uma plataforma <br> dedicada
+            à adoção responsável de <br> cães e gatos.
+            Conectamos pets <br> que precisam de um
+            lar a pessoas <br> prontas para amar.
+            Adote, <br> transforme vidas!
+          </p>
+          <div class="contact">
+            <p>Contate-nos:</p>
+            <div class="icons">
+              <img src="../img/icons8-instagram-50 (1).png" alt="Instagram" />
+              <img src="../img/icons8-whatsapp-50.png" alt="WhatsApp" />
+            </div>
+          </div>
+        </div>
+    
+        <div class="right-side">
+          <form class="form" id="login-form">
+      <label>Nome do Animal*</label>
+      <input type="text" id="nome" required />
+    
+      <label>Espécie*</label>
+      <input type="email" id="email" required />
+    
+      <label>Sexo*</label>
+      <input type="password" id="senha" required />
+    
+      <label>Porte*</label>
+      <input type="password" id="confirm_senha" required />
+    
+      <label>Data de nascimento*</label>
+      <input type="date" id="data_nascimento" required />
+    
+      <label>CPF*</label>
+      <input type="number" id="cpf" required />
+    
+      <label>Contato*</label>
+      <input placeholder="ex: (xx) xxxxx-xxxx" type="number" id="contato1" />
+    
+      <label>Contato reserva*</label>
+      <input placeholder="ex: (xx) xxxxx-xxxx" type="number" id="contato2" />
+    
+      <label for="estado">Estado*</label>
+      <input type="text" id="estado" required />
+    
+      <label for="cep">Cidade*</label>
+      <input type="text" id="cep" required placeholder="00000-000" />
+    
+      <label>Saúde*</label>
+      <div class="checkbox-container">
+        <label class="checkbox-item">
+          <input type ="checkbox" checked>
+          vacinado
+        </label>
+    
+        <label class="checkbox-item">
+          <input type="checkbox" checked>
+          vermífugado
+        </label>
+    
+        <label class="checkbox-item">
+          <input type="checkbox" checked>
+          castrado
+        </label>
+      </div>
+    
+      <label>Caso faça parte de uma ONG, coloque no espaço abaixo seu site</label>
+      <input type="text" id="site_ong" />
+    
+      <div class="biro"></div>
+    
+      <button type="submit" class="btn">Finalizar Cadastro</button>
+    </form>
+    
+        </div>
+        
+      </div>
+  </main>
+  <script src="../../bore.js"></script>
+</body>
+
+</html>
