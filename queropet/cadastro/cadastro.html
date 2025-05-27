@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QueroPet - cadastro</title>
+  <link rel="stylesheet" href="style2.css" />
+  
+</head>
+
+<body>
+  
+  <div class="container">
+    <div class="left-side">
+      
+      
+      <img src="../img/logo1.png" alt="Logo QueroPet" class="logo" />
+      <p class="description">
+        QueroPet é uma plataforma <br> dedicada
+        à adoção responsável de <br> cães e gatos.
+        Conectamos pets <br> que precisam de um
+        lar a pessoas <br> prontas para amar.
+        Adote, <br> transforme vidas!
+      </p>
+      <div class="contact">
+        <p>Contate-nos:</p>
+        <div class="icons">
+          <img src="../img/icons8-instagram-50 (1).png" alt="Instagram" />
+          <img src="../img/icons8-whatsapp-50.png" alt="WhatsApp" />
+        </div>
+      </div>
+    </div>
+
+    <div class="right-side">
+      <form class="form" id="login-form">
+  <h2>CADASTRO</h2>
+  <label>Nome*</label>
+  <input type="text" id="nome" required />
+
+  <label>Email*</label>
+  <input type="email" id="email" required />
+
+  <label>Senha*</label>
+  <input type="password" id="senha" required />
+
+  <label>Confirmar Senha*</label>
+  <input type="password" required />
+
+  <label>Palavra Chave*</label>
+  <input type="text" id="palavra_chave" required />
+
+  <label>Data de nascimento*</label>
+  <input type="date" id="data_nascimento" required />
+
+  <label>CPF*</label>
+  <input type="number" id="cpf" required />
+
+  <label>Contato*</label>
+  <input placeholder="ex: (xx) xxxxx-xxxx" type="number" id="contato1" />
+
+  <label>Contato reserva*</label>
+  <input placeholder="ex: (xx) xxxxx-xxxx" type="number" id="contato2" />
+
+  <label for="estado">Estado*</label>
+  <input type="text" id="estado" required />
+
+  <label for="cep">CEP*</label>
+  <input type="text" id="cep" required placeholder="00000-000" />
+
+  <label>Qual o seu interesse?*</label>
+  <div class="checkbox-container">
+    <label class="checkbox-item">
+      <input type="checkbox" checked>
+      Quero adotar
+    </label>
+
+    <label class="checkbox-item">
+      <input type="checkbox" checked>
+      Quero Divulgar
+    </label>
+
+    <label class="checkbox-item">
+      <input type="checkbox" checked>
+      Faço parte de uma ONG
+    </label>
+  </div>
+
+  <label>Caso faça parte de uma ONG, coloque no espaço abaixo seu site</label>
+  <input type="text" id="site_ong" />
+
+  <div class="biro"></div>
+
+  <button type="submit" class="btn">Finalizar Cadastro</button>
+</form>
+
+    </div>
+    
+  </div>
+  <script src="../../bore.js"></script>
+</body>
+
+</html>
