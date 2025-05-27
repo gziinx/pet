@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background-color: #1c1c1c;
+    color: white;
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    background-image: url('./queropet/img/filhote-de-cachorro-de-estimacao-completo\ 1.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .left-side {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 500px;
+
+  }
+  
+  .description {
+    margin-bottom: 40px;
+    font-size: x-large; 
+    text-align: center;
+  }
+  
+  .contact {
+    font-size: xx-large;
+  }
+  
+  .icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+  
+  }
+ 
+  .right-side {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form {
+    background-color: #fefae080;
+    padding: 40px 30px;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #A46731;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border-radius: 8px;
+    border: none;
+  }
+  
+  .forgot {
+    font-size: 14px;
+    display: block;
+    margin-top: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #A46731;
+  }
+  
+  .btn {
+    background-color: #A46731;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-size: larger;
+  }
+  
+  .register {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  a{
+    color: #ffffff;
+  }
+  
