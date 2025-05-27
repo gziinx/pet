@@ -113,6 +113,19 @@ app.put('/v1/controle-pet/usuario/:id', cors(), bodyParserJSON, async function (
     response.json(resultusuario)
 }) 
 
+app.post('/v1/controle-pet/login', cors(), bodyParserJSON, async function(request, response){
+
+    //Recebe o content type da requisição
+    let contentType = request.headers['content-type']
+
+    //Recebe do body da requisição os dados encaminhados
+    let dadosBody = request.body
+    let resultusuario = await controllerUser.loginUsuario(dadosBody,contentType)
+
+    response.status(resultusuario.status_code)
+    response.json(resultusuario)
+})
+
 
 
 /********************************* ENDERECO ***********************************/

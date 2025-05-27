@@ -224,6 +224,43 @@ const buscarUsuario = async function(numero) {
         return message.ERROR_INTERNAL_SERVER_CONTROLLER // 500
     }
 }
+const loginUsuario = async function(user) {
+    try {
+    
+        let dadosUsuario = {}
+        if(
+        
+            user.email           == '' || user.email           == null || user.email           == undefined || user.email.length            > 100 ||
+            user.senha           == '' || user.senha           == null || user.senha           == undefined || user.senha.length            > 100 
+           )
+            {
+               return message.ERROR_REQUIRED_FIELDS//status code 400
+         }else{
+            // Chama a função para retornar as músicas do banco de dados
+            
+            let resultUsuario = await userDAO.loginUser(user)
+
+            if(resultUsuario != false || typeof(resultUsuario) == 'object'){
+                if(resultUsuario.length > 0){
+                    // Cria um JSON para colocar o Array de músicas 
+                    dadosUsuario.status = true
+                    dadosUsuario.status_code = 200
+                    dadosUsuario.usuario = resultUsuario
+    
+                    return dadosUsuario
+    
+                }else{
+                    return message.ERROR_NO_FOUND // 404
+                }
+            }else{
+                return message.ERROR_INTERNAL_SERVER_MODEL // 500
+            }
+        }
+
+    } catch (error) {
+        return message.ERROR_INTERNAL_SERVER_CONTROLLER // 500
+    }
+}
 
 
 module.exports = {
@@ -231,5 +268,6 @@ module.exports = {
     atualizarUsuario,
     excluirUsuario,
     listarUsuario,
-    buscarUsuario
+    buscarUsuario,
+    loginUsuario
 }

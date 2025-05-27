@@ -12,6 +12,12 @@ document.getElementById('login-form').addEventListener('submit', async function 
     const cep = document.getElementById('cep').value
     const dataNascimento = document.getElementById('data_nascimento').value
     const cpf = document.getElementById('cpf').value
+    const confir = document.getElementById('confirm_senha').value
+
+    if (senha !== confir) {
+        alert('as senhas são diferentes.')
+        return 
+    }
 
     try {
        
@@ -33,7 +39,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
 
         if (userResponse.ok) {
             alert('Usuário cadastrado com sucesso!')
-            window.location.href = './index.html'
+            window.location.href = '../../index.html'
         } else {
             const errorData = await userResponse.json()
             console.error(errorData)

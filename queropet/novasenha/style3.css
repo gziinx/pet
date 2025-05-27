@@ -8,70 +8,56 @@ body {
   font-family: sans-serif;
   background-color: #1c1c1c;
   color: white;
-  min-height: 100vh;
-  overflow-y: auto;
 }
 
 .container {
   display: flex;
-  min-height: 100vh;
-  background-image: url('../img/mulher-jovem-e-buldogue-frances-no-parque\ 1.png');
+  height: 100vh;
+  background-image: url('../img/filhote-de-cachorro-de-estimacao-completo\ 1.png');
   background-size: cover;
   background-position: center;
   position: relative;
-  flex-wrap: wrap; 
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .left-side {
   flex: 1;
   background-color: rgba(0, 0, 0, 0.5);
+  padding: px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .logo {
-  width: 550px;
+  width: 500px;
 
 }
+
 .description {
-  font-size: 29px;
-  font-weight: bold;
+  margin-bottom: 40px;
+  font-size: x-large; 
   text-align: center;
-  margin-bottom: 50px;
 }
 
 .contact {
-  font-size: 43px;
-}
-.contact p{
-  font-weight: bold;
+  font-size: xx-large;
 }
 
 .icons{
   display: flex;
   align-items: center;
   justify-content: center;
-  justify-content: space-around;
-  margin-top: 35px;
+  justify-content: space-between;
 
-}
-
-.right-side {
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
 }
 
 .form {
-  background-color: #ffe8c981;
+  background-color: #fefae080;
   padding: 40px 30px;
+  height: 50%;
   border-radius: 20px;
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   width: 100%;
   max-width: 400px;
 }
@@ -91,12 +77,22 @@ body {
   font-weight: bold;
 }
 
-.form input{
+.form input {
   width: 100%;
   padding: 10px;
   margin-top: 4px;
   border-radius: 8px;
   border: none;
+}
+
+.forgot {
+  font-size: 14px;
+  display: block;
+  margin-top: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #A46731;
 }
 
 .btn {
@@ -107,29 +103,16 @@ body {
   margin-top: 20px;
   border: none;
   border-radius: 10px;
-  font-size: larger;
+  font-size: 16px;
   cursor: pointer;
+  font-size: larger;
 }
 
-.checkbox-container {
-  background-color: white;
-  padding: 10px;
-  margin-top: 4px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.checkbox-item {
-  display: flex;
-  align-items: center;
-  font-weight: normal;
+.register {
+  text-align: center;
+  margin-top: 10px;
   font-size: 14px;
-  gap: 8px;
-  color: #000;
 }
-
-.checkbox-item input[type="checkbox"] {
-  transform: scale(1.2);
+a{
+  color: #ffffff;
 }
