@@ -12,6 +12,8 @@ document.getElementById('login-form').addEventListener('submit', async function 
     const cep = document.getElementById('cep').value
     const dataNascimento = document.getElementById('data_nascimento').value
     const cpf = document.getElementById('cpf').value
+
+
     const confir = document.getElementById('confirm_senha').value
 
     if (senha !== confir) {
@@ -34,12 +36,14 @@ document.getElementById('login-form').addEventListener('submit', async function 
                 data_nascimento: dataNascimento,
                 cpf: cpf,
                 id_endereco: 1
+
             })
         })
 
         if (userResponse.ok) {
             alert('Usuário cadastrado com sucesso!')
-            window.location.href = '../../index.html'
+            window.location.href = './index.html'
+
         } else {
             const errorData = await userResponse.json()
             console.error(errorData)
@@ -50,4 +54,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
         console.error(error)
         alert('Erro no processo de cadastro.')
     }
+
 })
+
+

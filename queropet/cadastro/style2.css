@@ -24,7 +24,7 @@ body {
 
 .left-side {
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +60,7 @@ body {
 
 .right-side {
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
+
   display: flex;
   justify-content: center;
   align-items: center;
