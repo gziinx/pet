@@ -1,6 +1,6 @@
 /*******************************************************************************
- * Objetivo: Criar a comunicação com o banco de dados para fazer CRUD de Contato
- * Data: 22/05/2025
+ * Objetivo: Criar a comunicação com o banco de dados para fazer CRUD de Especie
+ * Data: 27/05/2025
  * Autor: Felipe Vieira
  * Versão: 1.0
 ********************************************************************************/
@@ -10,19 +10,16 @@ const {PrismaClient} = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-//INSERT DO NOVO CONTATO
-const insertContato = async function(contato){
+//INSERT DA NOVA ESPECIE
+const insertEspecie = async function(especie){
     //Instancia (criar um objt a ser utilizado) a biblioteca do prisma/client
     try {
         
-            let sql = `insert into tbl_contato (  
-                                                telefone,
-                                                id_usuario
+            let sql = `insert into tbl_especie (  
+                                                especie
                                             )
                                             values(
-                                                '${contato.telefone}',
-                                                '${contato.id_usuario}'
-
+                                                '${especie.especie}'
                                             )`
 
             // Executa o scriptSQL no BD e aguarda o retorno no mesmo para saber se deu certo
@@ -39,16 +36,13 @@ const insertContato = async function(contato){
 }
 
 
-
-
-
-//ATUALIZAR UM contato EXISTENTE
-const updateContato = async function(contato){
+//ATUALIZAR UMA ESPECIE EXISTENTE
+const updateEspecie = async function(especie){
     try {
-        let sql = `update tbl_contato set       telefone = '${contato.telefone}',
-                                                id_usuario = '${contato.id_usuario}'
+        let sql = `update tbl_especie set      especie = '${especie.especie}'
+                                               
                                                 
-                                where id = ${contato.id}`
+                                where id = ${especie.id}`
 
     let result= await prisma.$executeRawUnsafe(sql)
 
@@ -61,11 +55,11 @@ const updateContato = async function(contato){
     }
 }
 
-//EXCLUIR UM CONTATO EXISTENTE
-const deleteContato = async function(id){
+//EXCLUIR UMA ESPECIE EXISTENTE
+const deleteEspecie = async function(id){
 
     try {
-        let sql = 'delete from tbl_contato where id = ?'
+        let sql = 'delete from tbl_especie where id = ?'
 
         let result = await prisma.$executeRawUnsafe(sql, id)
     
@@ -79,12 +73,12 @@ const deleteContato = async function(id){
     }
 }
 
-//RETORNAR TODOS OS CONTATO EXISTENTES
-const selectAllContatos = async function(){
+//RETORNAR TODOS AS ESPECIES EXISTENTES
+const selectAllEspecie = async function(){
 
     try {
         //ScriptSQL para retornar todos os dados
-        let sql = 'select * from tbl_contato order by id desc'
+        let sql = 'select * from tbl_especie order by id desc'
 
         //Executa o ScriptSQL no BD e aguarda o retorno dos dados
         let result = await prisma.$queryRawUnsafe(sql)
@@ -98,12 +92,12 @@ const selectAllContatos = async function(){
     }
 }
 
-//BUSCAR UM CONTATO PELO ID
-const selectByIdContato = async function(id){
+//BUSCAR UMA ESPECIE PELO ID
+const selectByIdEspecie = async function(id){
 
     try {
 
-        let sql = `SELECT * FROM tbl_contato WHERE id = ${id}`
+        let sql = `SELECT * FROM tbl_especie WHERE id = ${id}`
     
         let result = await prisma.$queryRawUnsafe(sql)
 
@@ -119,9 +113,9 @@ const selectByIdContato = async function(id){
 }
 
 module.exports = {
-    insertContato,
-    updateContato,
-    deleteContato,
-    selectAllContatos,
-    selectByIdContato
+    insertEspecie,
+    updateEspecie,
+    deleteEspecie,
+    selectAllEspecie,
+    selectByIdEspecie
 }

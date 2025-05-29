@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Objetivo: Criar a comunicação com o banco de dados para fazer CRUD de Contato
+ * Objetivo: Criar a comunicação com o banco de dados para fazer CRUD de RAÇA
  * Data: 22/05/2025
  * Autor: Felipe Vieira
  * Versão: 1.0
@@ -10,19 +10,16 @@ const {PrismaClient} = require('@prisma/client')
 
 const prisma = new PrismaClient()
 
-//INSERT DO NOVO CONTATO
-const insertContato = async function(contato){
+//INSERT DO NOVO USUARIO
+const insertRaca = async function(raca){
     //Instancia (criar um objt a ser utilizado) a biblioteca do prisma/client
     try {
         
-            let sql = `insert into tbl_contato (  
-                                                telefone,
-                                                id_usuario
+            let sql = `insert into tbl_raca (  
+                                                raca
                                             )
                                             values(
-                                                '${contato.telefone}',
-                                                '${contato.id_usuario}'
-
+                                                '${raca.raca}'
                                             )`
 
             // Executa o scriptSQL no BD e aguarda o retorno no mesmo para saber se deu certo
@@ -39,16 +36,13 @@ const insertContato = async function(contato){
 }
 
 
-
-
-
-//ATUALIZAR UM contato EXISTENTE
-const updateContato = async function(contato){
+//ATUALIZAR UM ENDERECO EXISTENTE
+const updateRaca = async function(raca){
     try {
-        let sql = `update tbl_contato set       telefone = '${contato.telefone}',
-                                                id_usuario = '${contato.id_usuario}'
+        let sql = `update tbl_raca set      raca = '${raca.raca}'
+                                               
                                                 
-                                where id = ${contato.id}`
+                                where id = ${raca.id}`
 
     let result= await prisma.$executeRawUnsafe(sql)
 
@@ -61,11 +55,11 @@ const updateContato = async function(contato){
     }
 }
 
-//EXCLUIR UM CONTATO EXISTENTE
-const deleteContato = async function(id){
+//EXCLUIR UM ENDERECO EXISTENTE
+const deleteRaca = async function(id){
 
     try {
-        let sql = 'delete from tbl_contato where id = ?'
+        let sql = 'delete from tbl_raca where id = ?'
 
         let result = await prisma.$executeRawUnsafe(sql, id)
     
@@ -79,12 +73,12 @@ const deleteContato = async function(id){
     }
 }
 
-//RETORNAR TODOS OS CONTATO EXISTENTES
-const selectAllContatos = async function(){
+//RETORNAR TODOS OS ENDERECOS EXISTENTES
+const selectAllRaca = async function(){
 
     try {
         //ScriptSQL para retornar todos os dados
-        let sql = 'select * from tbl_contato order by id desc'
+        let sql = 'select * from tbl_raca order by id desc'
 
         //Executa o ScriptSQL no BD e aguarda o retorno dos dados
         let result = await prisma.$queryRawUnsafe(sql)
@@ -98,12 +92,12 @@ const selectAllContatos = async function(){
     }
 }
 
-//BUSCAR UM CONTATO PELO ID
-const selectByIdContato = async function(id){
+//BUSCAR UM ENDERECO PELO ID
+const selectByIdRaca = async function(id){
 
     try {
 
-        let sql = `SELECT * FROM tbl_contato WHERE id = ${id}`
+        let sql = `SELECT * FROM tbl_raca WHERE id = ${id}`
     
         let result = await prisma.$queryRawUnsafe(sql)
 
@@ -119,9 +113,9 @@ const selectByIdContato = async function(id){
 }
 
 module.exports = {
-    insertContato,
-    updateContato,
-    deleteContato,
-    selectAllContatos,
-    selectByIdContato
+    insertRaca,
+    updateRaca,
+    deleteRaca,
+    selectAllRaca,
+    selectByIdRaca
 }

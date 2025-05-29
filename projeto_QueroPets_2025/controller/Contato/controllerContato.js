@@ -42,7 +42,45 @@ const inserirContato= async function (contato, contentType){
         return message.ERROR_INTERNAL_SERVER_CONTROLLER //500
         
 }
-} 
+}
+
+const criarContatoUltimoUsuario = async function(userData, contentType) {
+    try {
+        if (String(contentType).toLowerCase() === 'application/json') {
+
+            const telefone = userData.telefone
+            const id_usuario = userData.id // <- id do último usuário inserido
+
+            if (
+                telefone == '' || telefone == undefined || telefone == null || telefone.length > 100 ||
+                id_usuario == '' || id_usuario == undefined || id_usuario == null || isNaN(id_usuario)
+            ) {
+                return message.ERROR_REQUIRED_FIELDS // 400
+            }
+
+            const contato = {
+                telefone: telefone,
+                id_usuario: id_usuario
+            }
+
+            const result = await contatoDAO.insertContato(contato)
+
+            if (result) {
+                return message.SUCCESS_CREATED_ITEM // 201
+            } else {
+                return message.ERROR_INTERNAL_SERVER // 500
+            }
+
+        } else {
+            return message.ERROR_CONTENT_TYPE // 415
+        }
+
+    } catch (error) {
+        console.error('Erro em criarContatoUltimoUsuario:', error)
+        return message.ERROR_INTERNAL_SERVER_CONTROLLER // 500
+    }
+}
+
 
 //Funcão para tratar a atualização de um novo filme no DAO
 const atualizarContato = async function (id, contato, contentType){
@@ -142,7 +180,7 @@ const listarContato = async function(){
                 //Cria um JSON para colocar o ARRAY de artistas
                 dadosContatos.status = true
                 dadosContatos.status_code = 200,
-                dadosContatos.items = resultContato
+                dadosContatos.items = resultContato.length
                 
                 for (itemContato of resultContato) {
                     
@@ -154,7 +192,7 @@ const listarContato = async function(){
 
                     ContatoArray.push(itemContato)
                 }
-                console.log(ContatoArray)
+                // console.log(ContatoArray)
                 dadosContatos.contatos = ContatoArray
 
                 return dadosContatos
@@ -230,5 +268,6 @@ module.exports = {
     excluirContato,
     listarContato,
     buscarContato,
-    inserirContato
+    inserirContato,
+    criarContatoUltimoUsuario
 }
