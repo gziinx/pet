@@ -21,12 +21,12 @@ document.getElementById('bore').addEventListener('submit', async function (event
         id_sexo: 1,
         id_temperamento: 1,
         id_especie: 1,
-        comportamento: [{
+    comportamento: [{id: 1
 
         }
            ],
         saude:[
-            {}
+            {id: 1}
         ]
         
     }
@@ -37,7 +37,7 @@ document.getElementById('bore').addEventListener('submit', async function (event
 
         if (response.ok) {
             alert('Pet cadastrado com sucesso!')
-            window.location.href = '../../home/home.html'
+            window.location.href = '../home/home.html'
         } else {
             const errorData = await response.json()
             console.error(errorData)
