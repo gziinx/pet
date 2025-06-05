@@ -40,8 +40,7 @@ const inserirPet = async function(pet, contentType){
                 pet.id_sexo           == '' || pet.id_sexo           == undefined || pet.id_sexo           == null || isNaN(pet.id_sexo)                       || pet.id_sexo          <= 0    ||
                 pet.id_temperamento   == '' || pet.id_temperamento   == undefined || pet.id_temperamento   == null || isNaN(pet.id_temperamento)               || pet.id_temperamento  <= 0    ||
                 pet.id_especie        == '' || pet.id_especie        == undefined || pet.id_especie        == null || isNaN(pet.id_especie)                    || pet.id_especie       <= 0    ||
-                pet.id_saude          == '' || pet.id_saude          == undefined || pet.id_saude          == null || isNaN(pet.id_saude)                      || pet.id_saude         <= 0    ||
-                pet.id_endereco       == '' || pet.id_endereco       == undefined || pet.id_endereco       == null || isNaN(pet.id_endereco)                   || pet.id_endereco      <= 0 
+             pet.id_endereco       == '' || pet.id_endereco       == undefined || pet.id_endereco       == null || isNaN(pet.id_endereco)                   || pet.id_endereco      <= 0 
                )
        
            {
@@ -85,11 +84,11 @@ const inserirPet = async function(pet, contentType){
                         // Para cada gênero no array do body, cria uma variavel comportamento na lista de pet 
                         for (let saude of pet.saude) {
                             // verifica se o campo "comportamento" possui um atributo id e se é int
-                            if (saude.saude && !isNaN(saude.saude)) {
+                            if (saude.id && !isNaN(saude.id)) {
                                 // adicionando os ids na tbl_pet_Comportamento
                                 let petSaude = {
                                     id_pet: idpet,
-                                    id_saude: saude.saude
+                                    id_saude: saude.id
                                 }
                                 //console.log(petComportamento)
                                 await petSaudeDAO.insertPetSaude(petSaude);
