@@ -132,7 +132,7 @@ const listarPetComportamento = async function(){
                 dadospetComportamento.status = true
                 dadospetComportamento.status_code = 200
                 dadospetComportamento.items = resultpetComportamento.length
-                dadospetComportamento.pet = resultpetComportamento
+                dadospetComportamento.comportamento = resultpetComportamento
 
                 return dadospetComportamento
             }else{
@@ -161,7 +161,7 @@ const buscarPetComportamento = async function(id){
                      //Criando um JSON de retorno de dados para a API
                     dadospetComportamento.status = true
                     dadospetComportamento.status_code = 200
-                    dadospetComportamento.pet = resultpetComportamento
+                    dadospetComportamento.comportamento = resultpetComportamento
 
                     return dadosFimeGenero //200
                 }else{

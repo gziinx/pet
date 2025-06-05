@@ -132,7 +132,7 @@ const listarComportamento = async function(){
                 dadosComp.status = true
                 dadosComp.status_code = 200,
                 dadosComp.items = resultComp.length
-                dadosComp.comportamentos = resultComp
+                dadosComp.comportamento = resultComp
 
                 return dadosComp
 

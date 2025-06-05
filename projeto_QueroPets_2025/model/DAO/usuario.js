@@ -11,75 +11,6 @@ const {PrismaClient} = require('@prisma/client')
 const prisma = new PrismaClient()
 
 //INSERT DO NOVO USUARIO
-const insertUserContact = async function(user, contato){
-    //Instancia (criar um objt a ser utilizado) a biblioteca do prisma/client
-    try {
-        
-            let sql = `insert into tbl_usuario (  
-                                                nome,
-                                                email,
-                                                senha,
-                                                palavra_chave,
-                                                data_nascimento,
-                                                cpf,
-                                                id_endereco
-                                            )
-                                            values(
-                                                '${user.nome}',
-                                                '${user.email}',
-                                                '${user.senha}',
-                                                '${user.palavra_chave}',
-                                                '${user.data_nascimento}',
-                                                '${user.cpf}',
-                                                '${user.id_endereco}'
-                                            )`
-
-            // Executa o scriptSQL no BD e aguarda o retorno no mesmo para saber se deu certo
-            let result = await prisma.$executeRawUnsafe(sql)
-
-            console.log(result)
-
-            if(result){
-                let resultId = await prisma.$queryRawUnsafe(`
-                SELECT MAX(id) AS id FROM tbl_usuario
-              `)
-        
-            
-                let userId = resultId[0]?.id
-                
-                const ultimoId = resultUser[0]?.id // obtido do SELECT MAX(id) AS id FROM tbl_usuario
-
-            await criarContatoUltimoUsuario({
-                telefone: user.telefone,  // vem do body original
-                id: ultimoId
-            }, 'application/json')
-
-
-                let sqlContato = `insert into tbl_contato (  
-                    telefone,
-                    id_usuario
-                ) values (
-                    '${contato.telefone}',
-                    '${userId}'
-                )`
-
-                let resultContato = await prisma.$executeRawUnsafe(sqlContato)
-
-                if(resultContato)
-                    return true
-                else
-                    return false
-            }
-            else{
-                return false
-            }
-        
-    } catch (error) {
-        console.log(error)
-        return false
-    }
-}
-
 const insertUser = async function(user){
     //Instancia (criar um objt a ser utilizado) a biblioteca do prisma/client
     try {
@@ -88,6 +19,7 @@ const insertUser = async function(user){
                                                 nome,
                                                 email,
                                                 senha,
+                                                telefone,
                                                 palavra_chave,
                                                 data_nascimento,
                                                 cpf,
@@ -97,6 +29,7 @@ const insertUser = async function(user){
                                                 '${user.nome}',
                                                 '${user.email}',
                                                 '${user.senha}',
+                                                '${user.telefone}',
                                                 '${user.palavra_chave}',
                                                 '${user.data_nascimento}',
                                                 '${user.cpf}',
@@ -107,10 +40,18 @@ const insertUser = async function(user){
             let result = await prisma.$executeRawUnsafe(sql)
 
         
-                if(result)
-                    return true
-                else
+                if(result){
+                    let getID = `SELECT * FROM tbl_usuario WHERE email = '${user.email}' ORDER BY id DESC LIMIT 1 `
+                   
+
+                    let idPego = await prisma.$queryRawUnsafe(getID)
+                    
+                    return idPego[0]
+                }else{
                     return false
+                }
+                
+                    
             
         
     } catch (error) {
@@ -126,6 +67,7 @@ const updateUser = async function(user){
         let sql = `update tbl_usuario set       nome = '${user.nome}',
                                                 email = '${user.email}',
                                                 senha = '${user.senha}',
+                                                telefone = '${user.telefone} ',
                                                 palavra_chave = '${user.palavra_chave}',
                                                 data_nascimento = '${user.data_nascimento}',
                                                 cpf = '${user.cpf}',
@@ -148,7 +90,7 @@ const updateUser = async function(user){
 const deleteUser = async function(id){
 
     try {
-        let sql = 'delete from tbl_usuario where id = ?'
+        let sql = `delete from tbl_usuario where id = ${id}`
 
         let result = await prisma.$executeRawUnsafe(sql, id)
     
@@ -242,5 +184,4 @@ module.exports = {
     selectByIdUser,
     loginUser,
     selectLastInsertId,
-    insertUserContact
 }

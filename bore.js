@@ -9,10 +9,10 @@ document.getElementById('login-form').addEventListener('submit', async function 
     const senha = document.getElementById('senha').value
     const senhaRecuperacao = document.getElementById('palavra_chave').value
     const estado = document.getElementById('estado').value
-    const cep = document.getElementById('cep').value
+    const telefone = document.getElementById('telefone').value
     const dataNascimento = document.getElementById('data_nascimento').value
     const cpf = document.getElementById('cpf').value
-
+    
 
     const confir = document.getElementById('confirm_senha').value
 
@@ -23,7 +23,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
 
     try {
        
-
+                                        //10.107.144.16
                                         //https://projeto-queropets-2025-1.onrender.com/v1/controle-pet/usuario
         const userResponse = await fetch('http://localhost:8080/v1/controle-pet/usuario', {
             method: 'POST',
@@ -32,6 +32,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
                 nome: nome,
                 email: email,
                 senha: senha,
+                telefone:telefone,
                 palavra_chave: senhaRecuperacao,
                 data_nascimento: dataNascimento,
                 cpf: cpf,

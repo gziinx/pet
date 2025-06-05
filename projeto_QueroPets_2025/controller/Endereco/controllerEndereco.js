@@ -17,12 +17,16 @@ const inserirEndereco = async function(endereco, contentType){
          { 
             if(
             endereco.cep            == '' || endereco.cep           == null || endereco.cep           == undefined || endereco.cep.length            > 12 ||
-            endereco.estado          == '' || endereco.estado         == null || endereco.estado               == undefined ||  endereco.estado.length            > 24
+            endereco.logradouro          == '' || endereco.logradouro         == null || endereco.logradouro               == undefined ||  endereco.logradouro.length            > 100 ||
+            endereco.bairro          == '' || endereco.bairro         == null || endereco.bairro               == undefined ||  endereco.bairro.length            > 100 ||
+            endereco.uf          == '' || endereco.uf         == null || endereco.uf               == undefined ||  endereco.uf.length            > 5 
             ){
                 return message.ERROR_REQUIRED_FIELDS//status code 400
          }else{
                 //encaminhando os dados da endereco para o DAO realizar o insert no Banco de dados
                 let resultendereco = await enderecoDAO.insertEndereco(endereco)
+               
+
                 
                 if(resultendereco){
                     return message.SUCCESS_CREATED_ITEM // 201
@@ -43,7 +47,9 @@ const atualizarEndereco = async function(id, endereco, contentType){
             { 
                if(
                 endereco.cep            == '' || endereco.cep           == null || endereco.cep           == undefined || endereco.cep.length            > 12 ||
-                endereco.estado          == '' || endereco.estado         == null || endereco.estado               == undefined ||  endereco.estado.length            > 24
+                endereco.logradouro          == '' || endereco.logradouro         == null || endereco.logradouro               == undefined ||  endereco.logradouro.length            > 100 ||
+                    endereco.bairro          == '' || endereco.bairro         == null || endereco.bairro               == undefined ||  endereco.bairro.length            > 100 ||
+                endereco.uf          == '' || endereco.uf         == null || endereco.uf               == undefined ||  endereco.uf.length            > 5
                )
                 {
                    return message.ERROR_REQUIRED_FIELDS//status code 400

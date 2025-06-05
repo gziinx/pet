@@ -20,8 +20,8 @@ const insertPet = async function(pet){
                                                 data_nascimento,
                                                 foto,
                                                 necessidades,
+                                                id_endereco,
                                                 id_porte,
-                                                id_status,
                                                 id_raca,
                                                 id_sexo,
                                                 id_temperamento,
@@ -33,24 +33,34 @@ const insertPet = async function(pet){
                                                 '${pet.data_nascimento}',
                                                 '${pet.foto}',
                                                 '${pet.necessidades}',
+                                                '${pet.id_endereco}',
                                                 '${pet.id_porte}',
-                                                '${pet.id_status}',
                                                 '${pet.id_raca}',
                                                 '${pet.id_sexo}',
                                                 '${pet.id_temperamento}',
                                                 '${pet.id_especie}',
                                                 '${pet.id_saude}'
+                                               
                                             )`
+
 
             // Executa o scriptSQL no BD e aguarda o retorno no mesmo para saber se deu certo
             let result = await prisma.$executeRawUnsafe(sql)
+
             
-        if(result)
-            return true
-        else
-            return false
+            if(result){
+                let getID = `SELECT * FROM tbl_pet WHERE nome = '${pet.nome}' ORDER BY id DESC LIMIT 1 `
+
+                let idPego = await prisma.$queryRawUnsafe(getID)
+                
+                return idPego[0]
+                
+            }else{
+                return false
+            }
         
     } catch (error) {
+        console.log(error);
         return false
     }
 }
@@ -64,12 +74,12 @@ const updatePet = async function(pet){
                                                 foto = '${pet.foto}',
                                                 necessidades = '${pet.necessidades}',
                                                 id_porte = '${pet.id_porte}',
-                                                id_status = '${pet.id_status}',
                                                 id_raca = '${pet.id_raca}',
                                                 id_sexo = '${pet.id_sexo}',
                                                 id_temperamento = '${pet.id_temperamento}',
                                                 id_especie = '${pet.id_especie}',
-                                                id_saude = '${pet.id_saude}'
+                                                id_saude = '${pet.id_saude}',
+                                                id_endereco = '${pet.id_endereco}'
                                 where id = ${pet.id}`
 
     let resultpet= await prisma.$executeRawUnsafe(sql)

@@ -14,26 +14,41 @@ const prisma = new PrismaClient()
 const insertEndereco = async function(endereco){
     //Instancia (criar um objt a ser utilizado) a biblioteca do prisma/client
     try {
+
         
             let sql = `insert into tbl_endereco (  
-                                                estado ,
-                                                cep
+                                                cep,
+                                                logradouro,
+                                                bairro,
+                                                uf
                                             )
                                             values(
-                                                '${endereco.estado}',
-                                                '${endereco.cep}'
-
+                                                '${endereco.cep}',
+                                                '${endereco.logradouro}',
+                                                '${endereco.bairro}',
+                                                '${endereco.uf}'
                                             )`
+                                        
 
             // Executa o scriptSQL no BD e aguarda o retorno no mesmo para saber se deu certo
             let result = await prisma.$executeRawUnsafe(sql)
             
+
+            if(result != 0){
+                console.log(result)
+            }else{
+                console.log("result não está sendo recebido")
+                
+            }
+
+
         if(result)
             return true
         else
             return false
         
     } catch (error) {
+        console.log(error)
         return false
     }
 }

@@ -1,5 +1,7 @@
 'use strict'
 
+import { postPet } from './pet'
+
 document.getElementById('bore').addEventListener('submit', async function (event) {
     event.preventDefault()
 
@@ -13,7 +15,7 @@ document.getElementById('bore').addEventListener('submit', async function (event
 
 
         //https://projeto-queropets-2025-1.onrender.com/v1/controle-pet/usuario
-        const userResponse = await fetch('http://localhost:8080/v1/controle-pet/pet', {
+         const userResponse = await fetch('http://localhost:8080/v1/controle-pet/pet', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

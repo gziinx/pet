@@ -9,6 +9,7 @@
   html, body {
     height: 100%;
     overflow-x: hidden;
+    scroll-behavior: smooth;
   }
   
   body {
@@ -174,23 +175,28 @@
     display: flex;
     justify-content: center;
     padding: 0 2rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    align-items: center;
+   
   }
   .so button{
     height: 80px;
     width: 400px;
     padding: 15px 30px;
     border: 1px solid black;
-    background-color: #A46731;
+    background-color: #F08D34;
+    border-radius: 30px;
     color: white;
     font-size: 32px;
     font-weight: bold;
     cursor: pointer;  
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .linha{
     background-color: #BC6C25;
     height: 7px;
-    width: 70px;
+    width: 250px;
   }
   
   /* Footer ao final da pÃ¡gina (NÃƒO FIXO) */
@@ -292,3 +298,35 @@
     font-size: 35px;
     color: white;
   }
+  .card-contato{
+    height: 400px;
+    width: 320px;
+    color: #000;
+    background-color: #FFB24E;
+    padding: 15px;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    border-radius: 20px;
+  }
+  .card-contato .po{
+    width: 290px;
+    height: 200px;
+    justify-content: center;
+    border: 0.5px solid black;
+    border-radius: 0px;
+}
+#icone-favorito{
+  margin-top: auto;
+  margin-left: auto;
+  cursor: pointer;
+  width: 55px;
+}
+.card-contato h2{
+  padding-top: 4px;
+  padding-bottom: 7px;
+}
+.card-contato p{
+  padding-top: 10px;
+}

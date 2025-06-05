@@ -33,7 +33,6 @@ const bodyParserJSON = bodyParser.json()
 //import das controllers
 const controllerUser = require('./controller/Usuario/ControllerUsuario')
 const controllerEndereco = require('./controller/Endereco/controllerEndereco.js')
-const controllerContato =  require('./controller/Contato/controllerContato')
 const controllerStatus =  require('./controller/Status/controllerStatus')
 const controllerPorte =  require('./controller/Porte/controllerPorte')
 const controllerTemperamento =  require('./controller/Temperamento/controllerTemperamento')
@@ -53,8 +52,10 @@ app.use((request, response, next)=>{
    response.header('Acces-Control-Allow-Origin', '*')
    response.header('Acces-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
 
-   app.use(cors())
-   next()
+   app.use(cors(
+
+       ))
+   next() 
 })
 
 /************************************************ USUARIO *************************************************************/
@@ -135,19 +136,6 @@ app.post('/v1/controle-pet/login', cors(), bodyParserJSON, async function(reques
     response.json(resultusuario)
 })
 
-app.post('/v1/controle-pet/usuarioContato', cors(), bodyParserJSON, async function(request, response){
-
-    //Recebe o content type da requisição
-    let contentType = request.headers['content-type']
-
-    //Recebe do body da requisição os dados encaminhados
-    let dadosBody = request.body
-    let resultusuario = await controllerUser.inserirUsuarioContato(dadosBody,contentType)
-
-    response.status(resultusuario.status_code)
-    response.json(resultusuario)
-})
-
 
 /************************************************ ENDERECO *************************************************************/
 
@@ -208,82 +196,6 @@ app.put('/v1/controle-pet/endereco/:id', cors(), bodyParserJSON, async function 
     response.status(resultEndereco.status_code)
     response.json(resultEndereco)
 }) 
-
-/************************************************ CONTATO *************************************************************/
-
-//END-POINT para inserir um Contato
-app.post('/v1/controle-pet/contato', cors(), bodyParserJSON, async function(request, response){
-
-    //Recebe o content type da requisição
-    let contentType = request.headers['content-type']
-
-    //Recebe do body da requisição os dados encaminhados
-    let dadosBody = request.body
-    let resultContato = await controllerContato.inserirContato(dadosBody,contentType)
-
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-})
-
-//END-POINT para listar todos os contato
-app.get('/v1/controle-pet/contato', cors(), bodyParserJSON, async function(request, response) {
-    
-    let resultContato = await controllerContato.listarContato()
-
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-})
-//END-POINT para buscar um contato por id
-app.get('/v1/controle-pet/contato/:id', cors(), bodyParserJSON, async function (request, response) {
-    
-    let IdContato = request.params.id
-
-    let resultContato = await controllerContato.buscarContato(IdContato)
-    
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-})
-//END-POINT  para deletar um contato 
-app.delete('/v1/controle-pet/contato/:id', cors(), async function (request, response) {
-    let id = request.params.id 
-  
-    let resultContato = await controllerContato.excluirContato(id)
-  
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-  })
-
-//END-POINT para atualizar oum usuario
-app.put('/v1/controle-pet/contato/:id', cors(), bodyParserJSON, async function (request,response){
-    
-    //Recebe o content-type da requisição
-    let contentType = request.headers['content-type']
-
-    //Recebe o ID da requisição
-    let IdContato = request.params.id
-
-    //Recebe os dados da requisição pelo body
-    let dadosBody = request.body
-
-    let resultContato = await controllerContato.atualizarContato(IdContato, dadosBody, contentType)
-
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-}) 
-
-app.post('/v1/controle-pet/contatoUsuario', cors(), bodyParserJSON, async function(request, response){
-
-    //Recebe o content type da requisição
-    let contentType = request.headers['content-type']
-
-    //Recebe do body da requisição os dados encaminhados
-    let dadosBody = request.body
-    let resultContato = await controllerContato.criarContatoUltimoUsuario(dadosBody,contentType)
-
-    response.status(resultContato.status_code)
-    response.json(resultContato)
-})
-
 
 
 /************************************************ STATUS *************************************************************/
@@ -929,6 +841,6 @@ app.put('/v1/controle-pet/pet-comportamento/:id', cors(), bodyParserJSON, async 
     response.json(resultPet)
 }) 
 
-app.listen('8080', function(){
+app.listen('3030', function(){
     console.log('API funcionando e aguardando requisições...')
 })

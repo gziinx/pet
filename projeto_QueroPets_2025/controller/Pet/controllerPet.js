@@ -11,6 +11,7 @@ const message = require('../../modulo/config.js')
 // import do arquivo para realizar o CROUD de dados no Banco de Dados
 const petDAO = require('../../model/DAO/pet.js')
 const petComportamentoDAO = require('../../model/DAO/pet_comportamento.js');
+const petSaudeDAO = require('../../model/DAO/pet_saude.js')
 
 const controllerPorte = require('../Porte/controllerPorte.js')
 const controllerStatus = require('../Status/controllerStatus.js')
@@ -18,8 +19,9 @@ const controllerRaca = require('../Raca/controllerRaca.js')
 const controllerSexo = require('../Sexo/controllerSexo.js')
 const controllerTemperamento = require('../Temperamento/controllerTemperamento.js')
 const controllerEspecie = require('../Especie/controllerEspecie.js')
-const controllerSaude = require('../Saude/controllerSaude.js')
 const controllerpetComportamento = require('../Pet/controllerComportPet.js')
+const controllerEndereco = require('../Endereco/controllerEndereco.js')
+const controllerPetSaude = require('../Pet/controllerSaudePet.js')
 
 // função para tratar a inserção de um novo pet no DAO
 const inserirPet = async function(pet, contentType){
@@ -33,13 +35,13 @@ const inserirPet = async function(pet, contentType){
                 pet.data_nascimento   == '' || pet.data_nascimento   == undefined || pet.data_nascimento   == null || pet.data_nascimento.length         > 10  ||
                 pet.foto              == '' || pet.foto              == undefined || pet.foto              == null || pet.foto.length                    > 100 ||
                 pet.necessidades      == '' || pet.necessidades      == undefined || pet.necessidades      == null || pet.necessidades.length            > 200 ||
-                pet.id_porte          == '' || pet.id_porte          == undefined || pet.id_porte          == null || isNaN(pet.id_porte)                      || pet.id_porte         <= 0    || 
-                pet.id_status         == '' || pet.id_status         == undefined || pet.id_status         == null || isNaN(pet.id_status)                     || pet.id_status        <= 0    || 
+                pet.id_porte          == '' || pet.id_porte          == undefined || pet.id_porte          == null || isNaN(pet.id_porte)                      || pet.id_porte         <= 0    ||  
                 pet.id_raca           == '' || pet.id_raca           == undefined || pet.id_raca           == null || isNaN(pet.id_raca)                       || pet.id_raca          <= 0    ||
                 pet.id_sexo           == '' || pet.id_sexo           == undefined || pet.id_sexo           == null || isNaN(pet.id_sexo)                       || pet.id_sexo          <= 0    ||
                 pet.id_temperamento   == '' || pet.id_temperamento   == undefined || pet.id_temperamento   == null || isNaN(pet.id_temperamento)               || pet.id_temperamento  <= 0    ||
                 pet.id_especie        == '' || pet.id_especie        == undefined || pet.id_especie        == null || isNaN(pet.id_especie)                    || pet.id_especie       <= 0    ||
-                pet.id_saude          == '' || pet.id_saude          == undefined || pet.id_saude          == null || isNaN(pet.id_saude)                      || pet.id_saude         <= 0   
+                pet.id_saude          == '' || pet.id_saude          == undefined || pet.id_saude          == null || isNaN(pet.id_saude)                      || pet.id_saude         <= 0    ||
+                pet.id_endereco       == '' || pet.id_endereco       == undefined || pet.id_endereco       == null || isNaN(pet.id_endereco)                   || pet.id_endereco      <= 0 
                )
        
            {
@@ -49,32 +51,58 @@ const inserirPet = async function(pet, contentType){
                return message.ERROR_REQUIRED_FIELDS //400
            }else{
                let resultpet= await petDAO.insertPet(pet)
+                        
        
                 // associando generos
                 // verificando se o pet foi inserido no banco
-               if (resultpet) {
+                if (resultpet) {
                
-                //verificando se tem algum campo chamado "genero" para ser add e se esse campo retorna um array
-                if (pet.comportamento && Array.isArray(pet.comportamento)) {
-                    // Obtém o ID do pet inserido
-                    let petInserido = await petDAO.selectLastInsertId()
-                    //acessa a propriedade id dentro do objeto retornado
-                    let idpet = petInserido[0].id
-                    
-                    // Para cada gênero no array do body, cria uma variavel comportamento na lista de pet 
-                    for (let comportamento of pet.comportamento) {
-                        // verifica se o campo "comportamento" possui um atributo id e se é int
-                        if (comportamento.id && !isNaN(comportamento.id)) {
-                            // adicionando os ids na tbl_pet_Comportamento
-                            let petComportamento = {
-                                id_pet: idpet,
-                                id_Comportamento: comportamento.id
+                    //verificando se tem algum campo chamado "genero" para ser add e se esse campo retorna um array
+                    if (pet.comportamento && Array.isArray(pet.comportamento)) {
+                       
+                        // Obtém o ID do pet inserido
+                        let petInserido = await petDAO.selectLastInsertId()
+                        //acessa a propriedade id dentro do objeto retornado
+                        let idpet = petInserido[0].id
+                        
+
+                        // Para cada gênero no array do body, cria uma variavel comportamento na lista de pet 
+                        for (let comportamento of pet.comportamento) {
+                            console.log(comportamento.id)
+                            // verifica se o campo "comportamento" possui um atributo id e se é int
+                            if (comportamento.id && !isNaN(comportamento.id)) {
+                                // adicionando os ids na tbl_pet_Comportamento
+                                let petComportamento = {
+                                    id_pet: idpet,
+                                    id_comportamento: comportamento.id
+                                }
+                                console.log(petComportamento)
+                                //console.log(petComportamento)Add commentMore actions
+                                await petComportamentoDAO.insertPetComportamento(petComportamento);
                             }
-                            await petComportamentoDAO.insertPetComportamento(petComportamento);
+                        }
+
+                        // Para cada gênero no array do body, cria uma variavel comportamento na lista de pet 
+                        for (let saude of pet.saude) {
+                            // verifica se o campo "comportamento" possui um atributo id e se é int
+                            if (saude.saude && !isNaN(saude.saude)) {
+                                // adicionando os ids na tbl_pet_Comportamento
+                                let petSaude = {
+                                    id_pet: idpet,
+                                    id_saude: saude.saude
+                                }
+                                //console.log(petComportamento)
+                                await petSaudeDAO.insertPetSaude(petSaude);
+                            }
                         }
                     }
-                }
-                   return message.SUCCESS_CREATED_ITEM //201
+
+    
+                 
+                    return {
+                        ...message.SUCCESS_CREATED_ITEM, // 201
+                        data: resultpet
+                    }
                }else{
                    return message.ERROR_INTERNAL_SERVER_MODEL //500
                     }
@@ -85,12 +113,10 @@ const inserirPet = async function(pet, contentType){
 
         
     }catch(error){
-        console.log(error);
         
         return message.ERROR_INTERNAL_SERVER_CONTROLLER // 500
     }
-    
-        
+         
 }
 
 // função para tratar a atualização de um pet no DAO
@@ -101,16 +127,16 @@ const atualizarPet = async function(id, pet, contentType){
         if(String(contentType).toLowerCase() == 'application/json'){
             if ( 
                 pet.nome              == ''  || pet.nome              == undefined || pet.nome              == null || pet.nome.length                    > 100 ||
-                pet.data_nascimento   == ''  || pet.data_nascimento   == undefined || pet.data_nascimento   == null || pet.data_nascimento.length           > 10||
-                pet.foto              == ''  || pet.foto              == undefined || pet.foto              == null || pet.foto.length                     >100 ||
-                pet.necessidades       == '' || pet.necessidades      == undefined || pet.necessidades      == null || pet.necessidades.length             > 200 ||
-                pet.id_porte          == ''  || pet.id_porte          == undefined || pet.id_porte          == null || isNaN(pet.id_porte)                      || pet.id_porte         <= 0    || 
-                pet.id_status         == ''  || pet.id_status         == undefined || pet.id_status         == null || isNaN(pet.id_status)                     || pet.id_status        <= 0    || 
+                pet.data_nascimento   == ''  || pet.data_nascimento   == undefined || pet.data_nascimento   == null || pet.data_nascimento.length         > 10  ||
+                pet.foto              == ''  || pet.foto              == undefined || pet.foto              == null || pet.foto.length                    > 100 ||
+                pet.necessidades      == ''  || pet.necessidades      == undefined || pet.necessidades      == null || pet.necessidades.length            > 200 ||
+                pet.id_porte          == ''  || pet.id_porte          == undefined || pet.id_porte          == null || isNaN(pet.id_porte)                      || pet.id_porte         <= 0    ||
                 pet.id_raca           == ''  || pet.id_raca           == undefined || pet.id_raca           == null || isNaN(pet.id_raca)                       || pet.id_raca          <= 0    ||
                 pet.id_sexo           == ''  || pet.id_sexo           == undefined || pet.id_sexo           == null || isNaN(pet.id_sexo)                       || pet.id_sexo          <= 0    ||
                 pet.id_temperamento   == ''  || pet.id_temperamento   == undefined || pet.id_temperamento   == null || isNaN(pet.id_temperamento)               || pet.id_temperamento  <= 0    ||
                 pet.id_especie        == ''  || pet.id_especie        == undefined || pet.id_especie        == null || isNaN(pet.id_especie)                    || pet.id_especie       <= 0    ||
-                pet.id_saude          == ''  || pet.id_saude          == undefined || pet.id_saude          == null || isNaN(pet.id_saude)                      || pet.id_saude         <= 0   
+                pet.id_saude          == ''  || pet.id_saude          == undefined || pet.id_saude          == null || isNaN(pet.id_saude)                      || pet.id_saude         <= 0    ||
+                pet.id_endereco       == ''  || pet.id_endereco       == undefined || pet.id_endereco       == null || isNaN(pet.id_endereco)                   || pet.id_endereco      <= 0    
                )
        
            {
@@ -224,10 +250,6 @@ const listarPet = async function(){
                             itempet.porte = dadosporte.porte
                             //Remover o id do JSON
                             delete itempet.id_porte
-                        
-                            let dadosStatus = await controllerStatus.buscarStatus(itempet.id_status)
-                            itempet.status = dadosStatus.status
-                            delete itempet.id_status
 
                             let dadosRaca = await controllerRaca.buscarRaca(itempet.id_raca)
                             itempet.raca = dadosRaca.raca
@@ -245,20 +267,22 @@ const listarPet = async function(){
                             itempet.especie = dadosEspecie.especie
                             delete itempet.id_especie
 
-                            let dadosSaude = await controllerSaude.buscarSaude(itempet.id_saude)
-                            itempet.saude = dadosSaude.saude
-                            delete itempet.id_saude
+                            let dadosEndereco = await controllerEndereco.buscarEndereco(itempet.id_endereco)
+                            itempet.endereco = dadosEndereco.endereco
+                            delete itempet.id_endereco
 
                             // fazendo interação com a tbl_pet_genero
                             let dadosComportamento = await controllerpetComportamento.buscarComportamentoPet(itempet.id)
-                            console.log(dadosComportamento)
                             itempet.comportamento = dadosComportamento.comportamento
+
+                            let dadosSaude = await  controllerPetSaude.buscarSaudePet(itempet.id)
+                            itempet.saude = dadosSaude.saude
 
                         arraypets.push(itempet)
      
                     }
                     dadospet.pets = arraypets
-
+                    console.log(dadospet)
                     return dadospet
 
                 }else{
@@ -328,6 +352,10 @@ const buscarPet = async function(id){
                             let dadosSaude = await controllerSaude.buscarSaude(itempet.id_saude)
                             itempet.saude = dadosSaude.saude
                             delete itempet.id_saude
+
+                            let dadosEndereco = await controllerEndereco.buscarEndereco(itemp.id_endereco)
+                            itempet.endereco = dadosEndereco.endereco
+                            delete itempet.id_endereco
 
                             // fazendo interação com a tbl_pet_genero
                             let dadosComportamento = await controllerpetComportamento.buscarComportamentoPet(itempet.id)
