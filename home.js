@@ -5,9 +5,11 @@ import { getPets } from './pet.js'
 let cards = []
 
 async function carregarCards() {
-    const pets = await getPets()
+    const resposta = await getPets()
+    const pets = resposta.pets
+
     const container = document.getElementById('eventos-container')
-    container.innerHTML = '' // Limpa os cards antes de recarregar
+    container.innerHTML = ''
     cards = []
 
     pets.forEach(pet => {
@@ -18,6 +20,7 @@ async function carregarCards() {
 
     atualizarCardsVisiveis()
 }
+
 
 function criarCard(pet) {
     const card = document.createElement('div')

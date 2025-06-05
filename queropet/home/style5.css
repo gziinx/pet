@@ -167,8 +167,10 @@
   }
   
   .events-grid img {
-    width: 80%;
-    border-radius: 10px;
+    margin-top: auto;
+    margin-left: auto;
+    cursor: pointer;
+    width: 55px;
   }
 
   .so{
@@ -317,12 +319,7 @@
     border: 0.5px solid black;
     border-radius: 0px;
 }
-#icone-favorito{
-  margin-top: auto;
-  margin-left: auto;
-  cursor: pointer;
-  width: 55px;
-}
+
 .card-contato h2{
   padding-top: 4px;
   padding-bottom: 7px;
