@@ -1,28 +1,3 @@
-'use strict'
-
-const baseUrl = 'http://localhost:3030/v1/controle-pet/pet'
-
-// GET todos os pets
-export async function getPets() {
-    const response = await fetch(baseUrl)
-    const data = await response.json()
-    return data
-}
-
-// POST novo pet
-export async function postPet(pet) {
-    const options = {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(pet)
-    }
-
-    const response = await fetch(baseUrl, options)
-    return response
-}
-
 export async function uploadImageToAzure(uploadParams) {
 
     const { file, storageAccount, sasToken, containerName } = uploadParams;
@@ -50,4 +25,3 @@ export async function uploadImageToAzure(uploadParams) {
     }
    
 }
-

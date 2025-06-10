@@ -43,7 +43,7 @@ const controllerComportamento = require('./controller/Comportamento/controllerCo
 const controllerSaude = require('./controller/Saude/controllerSaude')
 const controllerPet = require('./controller/Pet/controllerPet')
 const controllerComportPet = require('./controller/Pet/controllerComportPet')
-
+const controllerSaudePet = require('./controller/Pet/controllerSaudePet')
 
 //Cria o objeto app com referencias do express para criar a API 
 const app = express()
@@ -836,6 +836,72 @@ app.put('/v1/controle-pet/pet-comportamento/:id', cors(), bodyParserJSON, async 
     let dadosBody = request.body
 
     let resultPet = await controllerComportPet.atualizarpetComportamento(id, dadosBody, contentType)
+
+    response.status(resultPet.status_code)
+    response.json(resultPet)
+}) 
+
+/************************************************ PET_COMPORTAMENTO *************************************************************/
+
+//END-POINT para inserir um pet
+app.post('/v1/controle-pet/pet-saude', cors(), bodyParserJSON, async function(request, response){
+
+    //Recebe o content type da requisição
+    let contentType = request.headers['content-type']
+
+    //Recebe do body da requisição os dados encaminhados
+    let dadosBody = request.body
+    let resultPet= await controllerSaudePet.inserirPetSaude(dadosBody,contentType)
+
+    response.status(resultPet.status_code)
+    response.json(resultPet)
+})
+
+//END-POINT para listar todos os pet
+app.get('/v1/controle-pet/pet-saude', cors(), bodyParserJSON, async function(request, response) {
+    
+    let resultPet = await controllerSaudePet.listarPetSaude()
+
+    response.status(resultPet.status_code)
+    response.json(resultPet)
+})
+
+//END-POINT para buscar um pet por id
+app.get('/v1/controle-pet/pet-saude/:id', cors(), bodyParserJSON, async function (request, response) {
+    
+    let id = request.params.id
+
+    let resultPet = await controllerSaudePet.buscarSaudePet(id)
+    
+    response.status(resultPet.status_code)
+    response.json(resultPet)
+})
+
+//END-POINT  para deletar um pet 
+app.delete('/v1/controle-pet/pet-saude/:id', cors(), async function (request, response) {
+
+    let id = request.params.id 
+  
+    let resultPet = await controllerSaudePet.excluirPetSaude(id)
+    console.log(resultPet)
+  
+    response.status(resultPet.status_code)
+    response.json(resultPet)
+})
+
+//END-POINT para atualizar um pet
+app.put('/v1/controle-pet/pet-saude/:id', cors(), bodyParserJSON, async function (request,response){
+    
+    //Recebe o content-type da requisição
+    let contentType = request.headers['content-type']
+
+    //Recebe o ID da requisição
+    let id = request.params.id
+
+    //Recebe os dados da requisição pelo body
+    let dadosBody = request.body
+
+    let resultPet = await controllerSaudePet.atualizarPetSaude(id, dadosBody, contentType)
 
     response.status(resultPet.status_code)
     response.json(resultPet)

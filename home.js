@@ -23,15 +23,18 @@ async function carregarCards() {
 
 
 function criarCard(pet) {
+    console.log(pet)
     const card = document.createElement('div')
     card.classList.add('card-contato')
 
-    card.innerHTML = `
-        <img class="po" src="${pet.foto}" alt="${pet.nome}">
-        <h2>${pet.nome}</h2>
-        <p>${pet.endereco?.cidade || 'Localização desconhecida'}</p>
-        <img class="inos icone-favorito" src="../img/like1.png" alt="Favoritar">
-    `
+    const fotoUrl = pet.foto
+
+card.innerHTML = `
+    <img class="po" src="${fotoUrl}" alt="">
+    <h2>${pet.nome}</h2>
+    <p>${pet.endereco?.[0]?.uf ? 'Localização: ' + pet.endereco[0].uf : 'Localização desconhecida'}</p>
+    <img class="inos icone-favorito" src="../img/like1.png" alt="Favoritar">
+`
 
     const icone = card.querySelector('.icone-favorito')
     let favoritado = false

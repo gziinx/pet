@@ -23,18 +23,20 @@
                                          ${petSaude.id_pet},
                                          ${petSaude.id_saude}
                                          )`
+
+                                            // console.log(sql); 
          
          //Await só vai funcionar se na função estiver com o async
          //Executa um script sql no banco de dados, e aguarda o resultado (retornando um true or false)
          let result  = await prisma.$executeRawUnsafe(sql)
- 
+        //  console.log(result);
+        console.log(result);
          if(result)
              return  true
          else
              return false//Bug no Banco de dados
          
          }catch(error){
-             
              return false//Bug de programação
      }
  
