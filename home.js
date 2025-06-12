@@ -23,25 +23,32 @@ async function carregarCards() {
 
 
 function criarCard(pet) {
-    console.log(pet)
     const card = document.createElement('div')
     card.classList.add('card-contato')
 
     const fotoUrl = pet.foto
 
-card.innerHTML = `
-    <img class="po" src="${fotoUrl}" alt="">
-    <h2>${pet.nome}</h2>
-    <p>${pet.endereco?.[0]?.uf ? 'Localização: ' + pet.endereco[0].uf : 'Localização desconhecida'}</p>
-    <img class="inos icone-favorito" src="../img/like1.png" alt="Favoritar">
-`
+    card.innerHTML = `
+        <img class="po" src="${fotoUrl}" alt="">
+        <h2>${pet.nome}</h2>
+        <p>${pet.endereco?.[0]?.uf ? 'Localização: ' + pet.endereco[0].uf : 'Localização desconhecida'}</p>
+        <img class="inos icone-favorito" src="../img/like1.png" alt="Favoritar">
+    `
 
     const icone = card.querySelector('.icone-favorito')
     let favoritado = false
 
-    icone.addEventListener('click', () => {
+    icone.addEventListener('click', (event) => {
+        event.stopPropagation() // impede que o clique no coração redirecione
         favoritado = !favoritado
         icone.src = favoritado ? '../img/like.png' : '../img/like1.png'
+    })
+
+    // Torna o card clicável
+    card.style.cursor = 'pointer'
+    card.addEventListener('click', () => {
+        localStorage.setItem('petSelecionado', JSON.stringify(pet))
+        window.location.href = '../vizu/vizu.html?id=' + pet.id
     })
 
     return card

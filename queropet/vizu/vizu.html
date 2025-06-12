@@ -1,98 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cadastro do Animal - QueroPet</title>
-  <link rel="stylesheet" href="vizu.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vizu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <script type="module" src="../../vizu.js" defer></script>
+    <title>Tela-pet</title>
 </head>
-
 <body>
-  <header>
-    <div class="logo">
-      <img src="../img/logo1_a46731-removebg-preview.png" alt="Logo QueroPet" />
-    </div>
-    <nav>
-      <a href="../home/home.html">Home</a>
-      <a href="#">Sobre nós</a>
-      <a href="#">Quero adotar</a>
-      <a href="#">Divulgar</a>
-    </nav>
-    <div class="buttons">
-      <button class="entrar">ENTRAR</button>
-      <button class="cadastrar">CADASTRAR</button>
-    </div>
-  </header>
+    <header>
+          <div class="logo">
+            <img src="../img/logo1_a46731-removebg-preview.png" alt="Logo QueroPet">
+          </div>
+          <nav>
+            <a href="../home/home.html">Home</a>
+            <a href="#iis">Sobre nós</a>
+            <a href="#ko">Quero adotar</a>
+            <a href="../cadastro/cadanima.html">Divulgar</a>
+          </nav>
+          <div class="buttons">
+            <button class="entrar">ENTRAR</button>
+            <button class="cadastrar">CADASTRAR</button>
+          </div>
+      </header>
+      <main>
+            <div class="sla">
+              <div class="imagempet" id="imagempet"></div>
+              <div class="aquelaLinha"></div>
+              <Button class="quero_adota" id="quero_adota">Quero Adotar</Button>
+            </div>
+          <div class="info" id="info">
+                <div class="Nomdepet" id="Nomepet">
+                    <h1 id="petnome">Nome do <br> Animal(gui)</h1>
+                </div>
+                <div class="lista" id="lista">
+                      <li id="especie">Especie</li>
+                       <div class="linha"></div>
+                      <li id="raca">Raca</li>
+                      <div class="linha"></div>
+                      <li id="sexo">Sexo</li>
+                      <div class="linha"></div>
+                      <li id="porte">Porte</li>
+                </div>
 
-  <main>
-    <h1>Cadastro do animal</h1>
-    <form class="form-container" id="bore">
-      <div class="left-section">
-        <label>Carregue as imagens do animal*</label>
-        <label for="upload" class="upload-area">
-          <img src="../img/add.png" alt="Upload de imagem" />
-          <span>mínimo: 3 fotos ou vídeos</span>
-          <input type="file" id="upload" accept="image/*" hidden />
-        </label>
+                <span class="nomeTutor" id="nomeTutor">
+                      <p id="usuario">Gustavo</p>
+                </span>
+                <div class="localizacao" id="localizacao">
+                    <h2>Localização:</h2>
+                    <span>
+                      <li id="endereco">ESTADO, CIDADE</li>
+                    </span>
+                </div>
+                <div class="sobre">
+                  <h2>Sobre: </h2>
+                  <p id="sobre_o_pet">Sou um vira-lata caramelo de 2 aninhos, cheio de energia e  amor pra dar! <br>Fui resgatado das ruas depois de passar por  dias difíceis, mas nunca perdi <br> meu jeitinho brincalhão. Hoje estou saudável, vacinado e só falta uma coisa <br>pra minha  felicidade ser completa: um lar cheio de carinho. <br>Vamos ser melhores amigos? 💚🐶</p>
+                  <div class="situacao" id="situacao">
+                    <li id="vacinado">Vacinado</li>
+                    <div class="horizontal"></div>
+                    <li id="Vermifugado">Vermifugado</li>
+                    <div class="horizontal"></div>
+                    <li id="castrado">Nao Castrado</li>
+                  </div>
+                </div>
 
-        <label for="sobre">Sobre o animal*</label>
-        <textarea id="sobre" placeholder="Escreva aqui a história, coisas relacionadas ao bicho"></textarea>
-
-        <div class="biro"></div>
-
-        <button type="submit" class="submit-btn">Cadastrar animal</button>
-      </div>
-
-      <div class="right-section">
-        <label for="animalName">Nome do animal*</label>
-        <input type="text" id="animalName" />
-
-        <label for="especie">Espécie*</label>
-        <select id="especie">
-          <option value="">Selecione uma espécie</option>
-        </select>
-
-        <label for="sexo">Sexo*</label>
-        <select id="sexo">
-          <option value="">Selecione um sexo</option>
-        </select>
-
-        <label for="porte">Porte*</label>
-        <select id="porte">
-          <option value="">Selecione um porte</option>
-        </select>
-
-        <label for="birthDate">Data de nascimento*</label>
-        <input type="date" id="birthDate" />
-
-        <label for="state">Estado*</label>
-        <input type="text" id="state" />
-
-        <label for="city">Cidade*</label>
-        <input type="text" id="city" />
-
-        <label>Saúde*</label>
-        <div class="checkboxes">
-          <label><input type="checkbox" id="vaccinated" checked /> vacinado</label>
-          <label><input type="checkbox" id="dewormed" checked /> vermifugado</label>
-          <label><input type="checkbox" id="neutered" checked /> castrado</label>
-        </div>
-
-        <label>Comportamento*</label>
-        <div class="tags" id="behaviorTags">
-          <span id="gentle">Gentil</span>
-          <span id="brave">Bravo</span>
-          <span id="calm">Calmo</span>
-          <span id="playful">Brincalhão</span>
-          <span id="fearful">Medroso</span>
-          <span id="needy">Carente</span>
-          <span id="independent">Independente</span>
-        </div>
-      </div>
-    </form>
-  </main>
-  <script type="module" src="../../anicad.js"></script>
+                <div class="comportamento" id="comportamento"> 
+                    <div id="aquela_lista_de_comportamento">
+                      <div>Gentil</div>
+                      <div>Bravo</div>
+                      <div>Calmo</div>
+                    </div>
+                </div>
+          </div>
+      </main>
 </body>
-
 </html>

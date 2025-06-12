@@ -142,15 +142,6 @@ select {
   border-radius: 8px;
 }
 
-.tags span {
-  background: #8BD999;
-  padding: 6px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  color: black;
-  font-size: small;
-  border: 1px solid black;
-}
 
 .biro{
   margin-top: 20px;
@@ -196,3 +187,19 @@ select {
   object-fit: contain;
 }
 
+#behaviorTags span {
+  background: #8BD999;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: black;
+  font-size: small;
+  border: 1px solid black;
+  
+}
+
+#behaviorTags span.selected {
+  background: #4CAF50;
+  color: white;
+  border: 1px solid black;
+}

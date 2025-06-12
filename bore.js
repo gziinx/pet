@@ -25,7 +25,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
        
                                         //10.107.144.16
                                         //https://projeto-queropets-2025-1.onrender.com/v1/controle-pet/usuario
-        const userResponse = await fetch('http://10.107.144.16:3030/v1/controle-pet/usuario', {
+        const userResponse = await fetch('http://localhost:3030/v1/controle-pet/usuario', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -43,7 +43,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
 
         if (userResponse.ok) {
             alert('Usuário cadastrado com sucesso!')
-            window.location.href = './index.html'
+            window.location.href = '/index.html'
 
         } else {
             const errorData = await userResponse.json()

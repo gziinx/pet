@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "@azure/storage-blob": "^12.27.0"
+    "@azure/storage-blob": "^12.27.0",
+    "@prisma/client": "^6.9.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "prisma": "^6.9.0"
   }
 }
